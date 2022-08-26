@@ -2,26 +2,26 @@
 # and NOT when you are using Azure RBAC as your Kubernetes RBAC backing store.
 #
 #  Mapping k8s cluster user facing roles to AAD groups: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
-#apiVersion: rbac.authorization.k8s.io/v1
-#kind: ClusterRoleBinding
-#metadata:
-#  name: cluster-admins
-#roleRef:
-#  apiGroup: rbac.authorization.k8s.io
-#  kind: ClusterRole
-#  name: cluster-admin
-#subjects:
-#  - kind: Group
-#    name: <replace-with-an-aad-group-object-id-for-this-cluster-role-binding>
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-admins
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: Group
+    name: 41c4d9d6-3b16-4c88-81b4-6a5262346629
 #---
-#apiVersion: rbac.authorization.k8s.io/v1
-#kind: ClusterRoleBinding
-#metadata:
-#  name: cluster-viewers
-#roleRef:
-#  apiGroup: rbac.authorization.k8s.io
-#  kind: ClusterRole
-#  name: view
-#subjects:
-#  - kind: Group
-#    name: <replace-with-an-aad-group-object-id-for-this-cluster-role-binding>
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-viewers
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+subjects:
+  - kind: Group
+    name: f36c11b3-b8a5-48ce-aeca-12c46d57aecd
