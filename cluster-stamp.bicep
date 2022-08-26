@@ -29,6 +29,7 @@ param clusterAuthorizedIPRanges array = []
   'australiaeast'
   'canadacentral'
   'centralus'
+  'centralindia'
   'eastus'
   'eastus2'
   'westus2'
