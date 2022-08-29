@@ -1426,7 +1426,7 @@ resource miAppGatewayFrontend 'Microsoft.ManagedIdentity/userAssignedIdentities@
 
 // User Managed Identity for the cluster's ingress controller pods. Used for Azure Key Vault Access
 resource podmiIngressController 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' = {
-  name: 'podmi-ingress-controller'
+  name: 'podmi-ingress-controller-${clusterName}'
   location: location
 }
 
@@ -1861,7 +1861,7 @@ resource mcOmsAgentMonitoringMetricsPublisherRole_roleAssignment 'Microsoft.Auth
 // Grant the AKS cluster with Managed Identity Operator role permissions over the managed identity used for the ingress controller. Allows it to be assigned to the underlying VMSS.
 resource miKubeletManagedIdentityOperatorRole_roleAssignment 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = {
   scope: podmiIngressController
-  name: guid(resourceGroup().id, 'podmi-ingress-controller', managedIdentityOperatorRole.id)
+  name: guid(resourceGroup().id, 'podmi-ingress-controller-${clusterName}', managedIdentityOperatorRole.id)
   properties: {
     roleDefinitionId: managedIdentityOperatorRole.id
     principalId: mc.properties.identityProfile.kubeletidentity.objectId
@@ -1871,7 +1871,7 @@ resource miKubeletManagedIdentityOperatorRole_roleAssignment 'Microsoft.Authoriz
 
 resource mcAadAdminGroupClusterAdminRole_roleAssignment 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = if (isUsingAzureRBACasKubernetesRBAC) {
   scope: mc
-  name: guid('aad-admin-group', mc.id, clusterAdminAadGroupObjectId)
+  name: guid('aad-admin-group-${clusterName', mc.id, clusterAdminAadGroupObjectId)
   properties: {
     roleDefinitionId: clusterAdminRole.id
     description: 'Members of this group are cluster admins of this cluster.'
