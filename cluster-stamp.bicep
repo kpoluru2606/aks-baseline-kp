@@ -1871,7 +1871,7 @@ resource miKubeletManagedIdentityOperatorRole_roleAssignment 'Microsoft.Authoriz
 
 resource mcAadAdminGroupClusterAdminRole_roleAssignment 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = if (isUsingAzureRBACasKubernetesRBAC) {
   scope: mc
-  name: guid('aad-admin-group-${clusterName', mc.id, clusterAdminAadGroupObjectId)
+  name: guid('aad-admin-group-${clusterName}', mc.id, clusterAdminAadGroupObjectId)
   properties: {
     roleDefinitionId: clusterAdminRole.id
     description: 'Members of this group are cluster admins of this cluster.'
